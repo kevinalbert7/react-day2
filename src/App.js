@@ -1,35 +1,57 @@
 import React from "react"
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Title from "./components/Title"
-import Content from "./components/Content"
-import Button from "./components/Button"
+import Button from "react-bootstrap/Button"
 
-import "./App.css"
 
 class App extends React.Component {
-  handleClick() {
-    console.log("hello")
+  constructor() {
+    super()
+
+    // state initial
+    this.state = {
+      number: 6,
+      name: "Eloi"
+    }
   }
 
-  handleChange(event) {
-    console.log(event.target.value)
+  handlePlusClick = () => {
+    if (this.state.number < 10) {
+      this.setState({ number: this.state.number + 1 })
+    }
   }
- 
+
+
+  handleMinusClick = () => {
+    if (this.state.number > 0) {
+      this.setState({ number: this.state.number - 1 })
+    } 
+  }
+
+  handleChange = (event) => {
+    this.setState({ name: event.target.value })
+  }
+
   render() {
+    console.log(this.state.number)
+  
     return (
-      <div>
-        <Title title="Home" color="#0000ff" />
-        <Content content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-        <Button label="Change title" onClick={this.handleClick} />
+      <>
+        <Title color="red" title="hello" />
+        <h1>{this.state.number}</h1>
+        {/* <Button onClick={this.handleMinusClick}>-</Button> */}
+        {/* <Button onClick={this.handlePlusClick}>+</Button> */}
+        <Button variant="danger">-</Button>
+        <Button variant="success">+</Button>
         <br />
+        <h1>{this.state.name}</h1>
         <input
-          placeholder="Type text"
-          type="range"
+          type="text"
+          placeholder="tappez votre nom"
           onChange={this.handleChange}
-          min={100}
-          max={999}
         />
-      </div>
+      </>
     )
   }
 }
